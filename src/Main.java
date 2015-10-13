@@ -1,12 +1,13 @@
 /* by Hongda Zeng
     October 12, 2015
  */
+
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.stage.*;
-import javafx.scene.*;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,37 +45,42 @@ public class Main extends Application {
         //Navigational buttons
         Button buttonNumber = new Button("Go to the number generator");
         Button buttonQuote = new Button("Read a random quote");
+        Button buttonAbout = new Button("About");
+
+
         Button returnToMain = new Button("Return to Main");
         Button returnToMain2 = new Button("Return to Main");
 
         buttonNumber.setOnAction(e -> window.setScene(sceneNumber));
         buttonQuote.setOnAction(e -> window.setScene(sceneQuote));
+        buttonAbout.setOnAction(e -> PopupBox.displaySimple("About", "   This application is created by" +
+                " Hongda Zeng"));
         returnToMain.setOnAction(e -> window.setScene(sceneMain));
         returnToMain2.setOnAction(e -> window.setScene(sceneMain));
 
         //Action buttons
         Button genNumber = new Button("Click to generate a number");
-        genNumber.setOnAction(e->{
-            int a = getNumber(1,1000);
+        genNumber.setOnAction(e -> {
+            int a = getNumber(1, 1000);
             labelNumber1.setText("You number is : " + a);
         });
         Button getQuote = new Button("Get a new quote");
-        getQuote.setOnAction(e->{
+        getQuote.setOnAction(e -> {
             String newQuote = getQuote();
             labelQuote1.setText(newQuote);
         });
 
         VBox layoutMain = new VBox(20);
-        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote);
+        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonAbout);
         sceneMain = new Scene(layoutMain, 450, 300);
 
         VBox layoutNumber = new VBox(20);
-        layoutNumber.getChildren().addAll(labelNumber1,genNumber,returnToMain);
-        sceneNumber = new Scene(layoutNumber,450,300);
+        layoutNumber.getChildren().addAll(labelNumber1, genNumber, returnToMain);
+        sceneNumber = new Scene(layoutNumber, 450, 300);
 
         VBox layoutQuote = new VBox(20);
-        layoutQuote.getChildren().addAll(labelQuote1,getQuote,returnToMain2);
-        sceneQuote = new Scene(layoutQuote,600,300);
+        layoutQuote.getChildren().addAll(labelQuote1, getQuote, returnToMain2);
+        sceneQuote = new Scene(layoutQuote, 600, 300);
 
         window.setScene(sceneMain);
         window.setTitle("Fun GUI");
@@ -87,7 +93,7 @@ public class Main extends Application {
         return someInt;
     }
 
-    public void readQuotes (){
+    public void readQuotes() {
         try (BufferedReader br = new BufferedReader(new FileReader(quotes))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -98,7 +104,7 @@ public class Main extends Application {
         }
     }
 
-    public String getQuote(){
+    public String getQuote() {
         int numQuote = quoteList.size();
         int ranQuote = random.nextInt(numQuote);
         return quoteList.get(ranQuote);
