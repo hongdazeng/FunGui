@@ -3,6 +3,7 @@
  */
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,6 +46,7 @@ public class Main extends Application {
         //Navigational buttons
         Button buttonNumber = new Button("Go to the number generator");
         Button buttonQuote = new Button("Read a random quote");
+        Button buttonTime = new Button("See current time");
         Button buttonAbout = new Button("About");
 
 
@@ -53,8 +55,9 @@ public class Main extends Application {
 
         buttonNumber.setOnAction(e -> window.setScene(sceneNumber));
         buttonQuote.setOnAction(e -> window.setScene(sceneQuote));
-        buttonAbout.setOnAction(e -> PopupBox.displaySimple("About", "   This application is created by" +
+        buttonAbout.setOnAction(e -> PopupBox.displaySimple("About", "This application is created by" +
                 " Hongda Zeng"));
+        buttonTime.setOnAction(e -> PopupBox.timeBox());
         returnToMain.setOnAction(e -> window.setScene(sceneMain));
         returnToMain2.setOnAction(e -> window.setScene(sceneMain));
 
@@ -71,8 +74,9 @@ public class Main extends Application {
         });
 
         VBox layoutMain = new VBox(20);
-        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonAbout);
+        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonTime, buttonAbout);
         sceneMain = new Scene(layoutMain, 450, 300);
+        layoutMain.setPadding(new Insets(20, 20, 20, 20));
 
         VBox layoutNumber = new VBox(20);
         layoutNumber.getChildren().addAll(labelNumber1, genNumber, returnToMain);
