@@ -1,5 +1,5 @@
 /* by Hongda Zeng
-    October 12, 2015
+ *  October 12, 2015
  */
 
 import javafx.application.Application;

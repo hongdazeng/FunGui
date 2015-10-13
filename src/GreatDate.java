@@ -27,7 +27,16 @@ public class GreatDate {
     private int second;
 
     public GreatDate() {
-        refresh();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DATE);
+        hour = calendar.get(Calendar.HOUR);
+        minute = calendar.get(Calendar.MINUTE);
+        second = calendar.get(Calendar.SECOND);
+
+        if (calendar.isLeapYear(year)) {
+            isLeapYear = true;
+        }
     }
 
     public int getYear() {
@@ -76,16 +85,4 @@ public class GreatDate {
         return (hour + ":" + minute + ":" + second);
     }
 
-    public void refresh() {
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DATE);
-        hour = calendar.get(Calendar.HOUR);
-        minute = calendar.get(Calendar.MINUTE);
-        second = calendar.get(Calendar.SECOND);
-
-        if (calendar.isLeapYear(year)) {
-            isLeapYear = true;
-        }
-    }
 }

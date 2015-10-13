@@ -49,8 +49,15 @@ public class PopupBox {
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
 
+        Button refreshButton = new Button("Refresh");
+        refreshButton.setOnAction(e -> {
+            GreatDate newTime = new GreatDate();
+            String b = ("" + newTime.getDate(true) + "\n" + newTime.getTime());
+            label.setText(b);
+        });
+
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label, closeButton);
+        layout.getChildren().addAll(label, refreshButton, closeButton);
         layout.setAlignment(Pos.CENTER);
 
         Scene scene = new Scene(layout);
