@@ -23,7 +23,6 @@ public class Main extends Application {
     Stage window;
     Scene sceneMain, sceneNumber, sceneQuote;
     ArrayList<String> quoteList = new ArrayList<>();
-
     File quotes = new File("data\\quotes.txt");
 
     public static void main(String[] args) {
@@ -33,6 +32,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         window = primaryStage;
 
         readQuotes();
@@ -48,6 +48,7 @@ public class Main extends Application {
         Button buttonQuote = new Button("Read a random quote");
         Button buttonTime = new Button("See current time");
         Button buttonAbout = new Button("About");
+        Button buttonExit = new Button("Exit");
 
 
         Button returnToMain = new Button("Return to Main");
@@ -58,6 +59,14 @@ public class Main extends Application {
         buttonAbout.setOnAction(e -> PopupBox.displaySimple("About", "This application is created by" +
                 " Hongda Zeng"));
         buttonTime.setOnAction(e -> PopupBox.timeBox());
+        buttonExit.setOnAction(e -> {
+            boolean exit = PopupBox.displayConfirmation("Exit?", "Are you sure you want to quit?");
+            if (exit) {
+                System.exit(1);
+            }
+
+        });
+
         returnToMain.setOnAction(e -> window.setScene(sceneMain));
         returnToMain2.setOnAction(e -> window.setScene(sceneMain));
 
@@ -74,8 +83,8 @@ public class Main extends Application {
         });
 
         VBox layoutMain = new VBox(20);
-        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonTime, buttonAbout);
-        sceneMain = new Scene(layoutMain, 450, 300);
+        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonTime, buttonAbout, buttonExit);
+        sceneMain = new Scene(layoutMain, 450, 350);
         layoutMain.setPadding(new Insets(20, 20, 20, 20));
 
         VBox layoutNumber = new VBox(20);
