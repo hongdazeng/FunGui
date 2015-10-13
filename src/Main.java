@@ -80,10 +80,12 @@ public class Main extends Application {
 
         VBox layoutNumber = new VBox(20);
         layoutNumber.getChildren().addAll(labelNumber1, genNumber, returnToMain);
+        layoutNumber.setPadding(new Insets(20, 20, 20, 20));
         sceneNumber = new Scene(layoutNumber, 450, 300);
 
         VBox layoutQuote = new VBox(20);
         layoutQuote.getChildren().addAll(labelQuote1, getQuote, returnToMain2);
+        layoutQuote.setPadding(new Insets(20, 20, 20, 20));
         sceneQuote = new Scene(layoutQuote, 600, 300);
 
         window.setScene(sceneMain);

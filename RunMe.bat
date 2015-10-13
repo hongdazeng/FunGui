@@ -1,0 +1,10 @@
+javac src\\GreatDate.java
+MOVE src\\GreatDate.class
+javac src\\PopupBox.java
+MOVE src\\PopupBox.class
+javac src\\Main.java
+MOVE src\\Main.class
+java Main
+DEL GreatDate.class
+DEL PopupBox.class
+DEL Main.class
