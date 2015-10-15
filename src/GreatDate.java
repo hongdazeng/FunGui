@@ -8,17 +8,16 @@ import java.util.GregorianCalendar;
 
 public class GreatDate {
 
-    String monthShort[] = {
+    boolean isLeapYear = false;
+    private String[] monthShort = {
             "Jan", "Feb", "Mar", "Apr",
             "May", "Jun", "Jul", "Aug",
             "Sep", "Oct", "Nov", "Dec"};
-    String monthLong[] = {
+    private String[] monthLong = {
             "January", "February", "March", "April",
             "May", "June", "July", "August",
             "September", "October", "November", "December"};
-    GregorianCalendar calendar = new GregorianCalendar();
-
-    boolean isLeapYear = false;
+    private GregorianCalendar calendar = new GregorianCalendar();
     private int year;
     private int month;
     private int day;

@@ -4,9 +4,12 @@
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,7 +40,7 @@ public class Main extends Application {
 
         readQuotes();
 
-        Label labelMain = new Label("Welcome to the main menu, choose an option");
+        Label labelMain = new Label("Welcome to the main menu, choose an option:");
         Label labelNumber1 = new Label("This is a random number generator (1 to 1000)");
         Label labelQuote1 = new Label("This will display a quote");
         labelQuote1.setWrapText(true);
@@ -50,6 +53,10 @@ public class Main extends Application {
         Button buttonAbout = new Button("About");
         Button buttonExit = new Button("Exit");
 
+        buttonNumber.setMaxWidth(Double.MAX_VALUE);
+        buttonQuote.setMaxWidth(Double.MAX_VALUE);
+        buttonTime.setMaxWidth(Double.MAX_VALUE);
+
 
         Button returnToMain = new Button("Return to Main");
         Button returnToMain2 = new Button("Return to Main");
@@ -59,13 +66,7 @@ public class Main extends Application {
         buttonAbout.setOnAction(e -> PopupBox.displaySimple("About", "This application is created by" +
                 " Hongda Zeng"));
         buttonTime.setOnAction(e -> PopupBox.timeBox());
-        buttonExit.setOnAction(e -> {
-            boolean exit = PopupBox.displayConfirmation("Exit?", "Are you sure you want to quit?");
-            if (exit) {
-                System.exit(1);
-            }
-
-        });
+        buttonExit.setOnAction(e -> closeMe());
 
         returnToMain.setOnAction(e -> window.setScene(sceneMain));
         returnToMain2.setOnAction(e -> window.setScene(sceneMain));
@@ -83,9 +84,19 @@ public class Main extends Application {
         });
 
         VBox layoutMain = new VBox(20);
-        layoutMain.getChildren().addAll(labelMain, buttonNumber, buttonQuote, buttonTime, buttonAbout, buttonExit);
-        sceneMain = new Scene(layoutMain, 450, 350);
+        layoutMain.getChildren().addAll(labelMain, buttonNumber,
+                buttonQuote, buttonTime);
         layoutMain.setPadding(new Insets(20, 20, 20, 20));
+
+        HBox layoutBot = new HBox(20);
+        layoutBot.getChildren().addAll(buttonAbout, buttonExit);
+        layoutBot.setPadding(new Insets(20, 20, 20, 20));
+        layoutBot.setAlignment(Pos.CENTER);
+
+        BorderPane mainPane = new BorderPane();
+        mainPane.setCenter(layoutMain);
+        mainPane.setBottom(layoutBot);
+        sceneMain = new Scene(mainPane, 450, 350);
 
         VBox layoutNumber = new VBox(20);
         layoutNumber.getChildren().addAll(labelNumber1, genNumber, returnToMain);
@@ -97,6 +108,10 @@ public class Main extends Application {
         layoutQuote.setPadding(new Insets(20, 20, 20, 20));
         sceneQuote = new Scene(layoutQuote, 600, 300);
 
+        window.setOnCloseRequest(e -> {
+            e.consume();
+            closeMe();
+        });
         window.setScene(sceneMain);
         window.setTitle("Fun GUI");
         window.show();
@@ -123,5 +138,12 @@ public class Main extends Application {
         int numQuote = quoteList.size();
         int ranQuote = random.nextInt(numQuote);
         return quoteList.get(ranQuote);
+    }
+
+    public void closeMe() {
+        boolean exit = PopupBox.displayConfirmation("Exit?", "Are you sure you want to quit?");
+        if (exit) {
+            window.close();
+        }
     }
 }
