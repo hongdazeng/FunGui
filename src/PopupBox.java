@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 public class PopupBox {
 
     static boolean yesNo;
+    boolean status = true;
+    private String userEntry;
 
     public static void displaySimple(String title, String message) {
         Stage window = new Stage();
@@ -102,6 +105,37 @@ public class PopupBox {
         window.showAndWait();
 
         return yesNo;
+    }
+
+    public void textEntry(String title, String text) {
+        Stage window = new Stage();
+        Label label = new Label(text);
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle(title);
+        window.setWidth(400.0D);
+        window.setHeight(400.0D);
+        TextField nameInput = new TextField();
+        Button button = new Button("Find");
+        button.setOnAction((e) -> {
+            try {
+                this.userEntry = nameInput.getText();
+            } catch (Exception var5) {
+                displaySimple("Bad input", "Please enter valid inputs");
+                this.status = false;
+            }
+
+            window.close();
+        });
+        VBox layout = new VBox(20.0D);
+        layout.getChildren().addAll(label, nameInput, button);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
+    }
+
+    public String getUserEntry() {
+        return this.userEntry;
     }
 
 }
